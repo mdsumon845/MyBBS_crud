@@ -9,12 +9,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($get_all_todo as $key=>$todo)
+        @foreach ($get_all_todo as $key=>$todo)
             <tr>
-                <td>{{$todo->id}}</td>
-                <td>{{$todo->title}}</td>
+                <td>{{ $todo->id }}</td>
+                <td>{{ $todo->title }}</td>
                 <td>
-                    <a href="{{url('todo_delete/'.$todo->id)}}" class="btn btn_danger btn-sm">Delete</a>
+                    <a href="{{ url('todo_delete/'.$todo->id) }}" class="btn btn_danger btn-sm">Delete</a>
                 </td>
             </tr>
         @endforeach
