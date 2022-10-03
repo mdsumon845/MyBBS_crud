@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Todo;
 use App\Http\Controllers\Controller;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use App\Service\TodoService
 use DB;
 
 class TodoController extends Controller
@@ -15,7 +16,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        $todo['get_all_todo']=Todo::orderBy('id','desc')->get();
+        $todo['get_all_todo'] = Todo::orderBy('id', 'desc')->get();
         return view ('todo.index', $todo);
     }
 
@@ -27,8 +28,8 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        $todo=new Todo();
-        $todo->title=$request->title;
+        $todo = new Todo();
+        $todo->title = $request->title;
         $todo->save();
         return redirect()->route('todo');
     }
@@ -40,8 +41,8 @@ class TodoController extends Controller
      */
     public function show()
     {
-        $todo['get_all_todo']=Todo::all();
-        return view ('todo.show',$todo);
+        $todo['get_all_todo'] = Todo::all();
+        return view ('todo.show', $todo);
     }
 
     /**
@@ -52,7 +53,7 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        $todo=Todo::find($id);
+        $todo = Todo::find($id);
         $todo->delete();
         return redirect()->back();
     }
@@ -60,8 +61,8 @@ class TodoController extends Controller
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;
-        $idArr = explode(",",$ids);
-        for ($i = 0;$i<count($idArr);$i++){
+        $idArr = explode(",", $ids);
+        for ($i = 0; $i<count($idArr); $i++){
             $result = DB::table('todos')->where('id', '=', $idArr[$i])->delete();
         }
         return response()->json(['success'=>"Selected Items Deleted successfully."]);

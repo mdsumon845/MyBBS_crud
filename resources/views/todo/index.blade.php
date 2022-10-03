@@ -10,21 +10,21 @@
     <main >
         <header>
             <h1>Todos</h1>
-            <span  class="purge delete_all" data-url="{{ route('bulkcategoryDelete') }}">Purge</span>
+            <span  class = "purge delete_all" data-url = "{{ route('bulkcategoryDelete') }}">Purge</span>
         </header>
 
-        <form action="{{ route('todo_store') }}" method="POST" >
+        <form action = "{{ route('todo_store') }}" method = "POST" >
             @csrf
-            <input type="text" name="title" value="" placeholder="Type new todo.">
+            <input type = "text" name = "title" value = "" placeholder = "Type new todo.">
         </form>
 
         <ul>
             @isset ($get_all_todo)
                 @foreach ($get_all_todo as $key=>$todo)
-                    <li id="tr_{{ $todo->id }}">
-                        <input type="checkbox" class="sub_chk" data-id="{{ $todo->id }}">
+                    <li id = "tr_{{ $todo->id }}">
+                        <input type = "checkbox" class = "sub_chk" data-id = "{{ $todo->id }}">
                         <span>{{ $todo->title }}</span>
-                        <span class="delete"><a onclick="return confirm('Are you sure?')" href="{{ url('todo_delete/'.$todo->id) }}">x</a></span>
+                        <span class = "delete"><a onclick = "return confirm('Are you sure?')" href = "{{ url('todo_delete/'.$todo->id) }}">x</a></span>
                     </li>
                 @endforeach
             @endisset

@@ -1,11 +1,11 @@
-<div class="back-link">
-    &laquo; <a href="{{ route('todo') }}">back</a>
+<div class = "back-link">
+    &laquo; <a href = "{{ route('todo') }}">back</a>
 </div>
-<table class="table">
+<table class = "table">
     <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">title</th>
+            <th scope = "col">id</th>
+            <th scope = "col">title</th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +14,7 @@
                 <td>{{ $todo->id }}</td>
                 <td>{{ $todo->title }}</td>
                 <td>
-                    <a href="{{ url('todo_delete/'.$todo->id) }}" class="btn btn_danger btn-sm">Delete</a>
+                    <a href = "{{ url('todo_delete/'.$todo->id) }}" class = "btn btn_danger btn-sm">Delete</a>
                 </td>
             </tr>
         @endforeach
