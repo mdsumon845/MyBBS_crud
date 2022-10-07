@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/todo', [TodoController::class, 'create'])->name('todo');
 Route::post('/todo_store', [TodoController::class, 'store'])->name('todo_store');
-Route::get('/todo_show', [TodoController::class, 'show'])->name('todo_show');
+Route::get('/todo_show/{id}', [TodoController::class, 'show'])->name('todo_show');
 Route::get('todo_delete/{todo_id}', [TodoController::class, 'destroy']);
 Route::delete('bulkcategoryDelete', [TodoController::class, 'deleteAll'])->name('bulkcategoryDelete');
 

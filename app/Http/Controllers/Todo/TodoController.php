@@ -3,21 +3,47 @@ namespace App\Http\Controllers\Todo;
 
 use App\Http\Controllers\Controller;
 use App\Models\Todo;
+use App\Services\TodoService;
 use Illuminate\Http\Request;
-use App\Service\TodoService
 use DB;
+use Exception;
 
 class TodoController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
+     * @var TodoService
+     */
+    protected $TodoService;
+
+    /**
+     * TodoController Constructor
+     *
+     * @param TodoService $TodoService
+     *
+     */
+    public function __construct(TodoService $TodoService)
+    {
+        $this->TodoService = $TodoService;
+    }
+
+     /**
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $todo['get_all_todo'] = Todo::orderBy('id', 'desc')->get();
-        return view ('todo.index', $todo);
+        $result = ['status' => 200];
+
+        try {
+            $result['get_all_todo'] = $this->TodoService->getAll();
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+        return view ('todo.index', $result);
     }
 
     /**
@@ -28,33 +54,62 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        $todo = new Todo();
-        $todo->title = $request->title;
-        $todo->save();
+        $data = $request->only([
+            'title'
+        ]);
+
+        $result = ['status' =>200];
+
+        try {
+            $result['data'] = $this->TodoService->savePostData($data);
+        } catch (Exception $e) {
+            $result = [
+                'status'=>500,
+                'error' =>$e->getMessage()
+            ];
+        }
         return redirect()->route('todo');
     }
 
     /**
      * Display the specified resource.
      *
+     * @param id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $todo['get_all_todo'] = Todo::all();
-        return view ('todo.show', $todo);
+        $result = ['status' => 200];
+
+        try {
+            $result['get_all_todo'] = $this->TodoService->getById($id);
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+        return view ('todo.show', $result);
     }
 
-    /**
+     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $todo = Todo::find($id);
-        $todo->delete();
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->TodoService->deleteById($id);
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
         return redirect()->back();
     }
 
