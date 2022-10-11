@@ -58,14 +58,14 @@ class TodoController extends Controller
             'title'
         ]);
 
-        $result = ['status' =>200];
+        $result = ['status' => 200];
 
         try {
             $result['data'] = $this->todoService->savePostData($data);
         } catch (Exception $e) {
             $result = [
-                'status'=>500,
-                'error' =>$e->getMessage()
+                'status'=> 500,
+                'error' => $e->getMessage()
             ];
         }
         return redirect()->route('todo');
