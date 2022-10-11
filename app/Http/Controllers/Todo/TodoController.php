@@ -4,29 +4,29 @@ namespace App\Http\Controllers\Todo;
 use App\Http\Controllers\Controller;
 use App\Models\Todo;
 use App\Services\TodoService;
-use Illuminate\Http\Request;
 use DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
     /**
-     * @var TodoService
+     * @var todoService
      */
-    protected $TodoService;
+    protected $todoService;
 
     /**
      * TodoController Constructor
      *
-     * @param TodoService $TodoService
+     * @param todoService $todoService
      *
      */
-    public function __construct(TodoService $TodoService)
+    public function __construct(todoService $todoService)
     {
-        $this->TodoService = $TodoService;
+        $this->todoService = $todoService;
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,14 +36,14 @@ class TodoController extends Controller
         $result = ['status' => 200];
 
         try {
-            $result['get_all_todo'] = $this->TodoService->getAll();
+            $result['get_all_todo'] = $this->todoService->getAll();
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
                 'error' => $e->getMessage()
             ];
         }
-        return view ('todo.index', $result);
+        return view('todo.index', $result);
     }
 
     /**
@@ -61,7 +61,7 @@ class TodoController extends Controller
         $result = ['status' =>200];
 
         try {
-            $result['data'] = $this->TodoService->savePostData($data);
+            $result['data'] = $this->todoService->savePostData($data);
         } catch (Exception $e) {
             $result = [
                 'status'=>500,
@@ -82,14 +82,14 @@ class TodoController extends Controller
         $result = ['status' => 200];
 
         try {
-            $result['get_all_todo'] = $this->TodoService->getById($id);
+            $result['get_all_todo'] = $this->todoService->getById($id);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
                 'error' => $e->getMessage()
             ];
         }
-        return view ('todo.show', $result);
+        return view('todo.show', $result);
     }
 
      /**
@@ -103,7 +103,7 @@ class TodoController extends Controller
         $result = ['status' => 200];
 
         try {
-            $result['data'] = $this->TodoService->deleteById($id);
+            $result['data'] = $this->todoService->deleteById($id);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
