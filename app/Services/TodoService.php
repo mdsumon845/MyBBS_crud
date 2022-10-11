@@ -10,19 +10,19 @@ use InvalidArgumentException;
 class TodoService
 {
     /**
-     * @var $TodoRepository
+     * @var $todoRepository
      */
-    protected $TodoRepository;
+    protected $todoRepository;
 
     /**
      * TodoService constructor.
      *
-     * @param TodoRepository $TodoRepository
+     * @param TodoRepository $todoRepository
      */
 
-    public function __construct(TodoRepository $TodoRepository)
+    public function __construct(TodoRepository $todoRepository)
     {
-        $this->TodoRepository = $TodoRepository;
+        $this->todoRepository = $todoRepository;
     }
 
     /**
@@ -31,7 +31,7 @@ class TodoService
      */
     public function getAll()
     {
-        return $this->TodoRepository->getAllPost();
+        return $this->todoRepository->getAllPost();
     }
 
 
@@ -51,7 +51,7 @@ class TodoService
         if ($validator->fails()) {
             throw new InvalidArgumentException($validator->errors()->first());
         }
-        $result = $this->TodoRepository->save($data);
+        $result = $this->todoRepository->save($data);
 
         return $result;
     }
@@ -64,7 +64,7 @@ class TodoService
      */
     public function getById($id)
     {
-        return $this->TodoRepository->getById($id);
+        return $this->todoRepository->getById($id);
     }
 
     /**
@@ -77,7 +77,7 @@ class TodoService
     {
         DB::beginTransaction();
         try{
-            $Todo = $this->TodoRepository->delete($id);
+            $todo = $this->todoRepository->delete($id);
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -88,7 +88,7 @@ class TodoService
 
         DB::commit();
 
-        return $Todo;
+        return $todo;
     }
 }
 

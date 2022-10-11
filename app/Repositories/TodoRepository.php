@@ -6,46 +6,46 @@ use App\Models\Todo;
 class TodoRepository
 {
     /**
-     * @var Todo
+     * @var todo
      */
-    protected $Todo;
+    protected $todo;
 
     /**
      * TodoRepository constructor.
      *
-     * @param Todo $Todo
+     * @param todo $todo
      */
 
-    public function __construct(Todo $Todo)
+    public function __construct(todo $todo)
     {
-        $this->Todo = $Todo;
+        $this->todo = $todo;
     }
 
     /**
      * Get all post
      *
-     * @return Todo $Todo
+     * @return todo $todo
      */
     public function getAllPost()
     {
-        return $this->Todo::orderBy('id', 'desc')
+        return $this->todo::orderBy('id', 'desc')
             ->get();
 
     }
 
 
     /**
-     * Save Todo
+     * Save todo
      *
      * @param $data
-     * @return Todo
+     * @return todo
      */
     public function save($data)
     {
-        $Todo = new $this->Todo;
-        $Todo->title = $data['title'];
-        $Todo->save();
-        return $Todo->fresh();
+        $todo = new $this->todo;
+        $todo->title = $data['title'];
+        $todo->save();
+        return $todo->fresh();
     }
 
     /**
@@ -56,22 +56,22 @@ class TodoRepository
      */
     public function getById($id)
     {
-        return $this->Todo
+        return $this->todo
             ->where('id', $id)
             ->get();
     }
 
     /**
-     * Delete Todo
+     * Delete todo
      *
      * @param $data
-     * @return Todo
+     * @return todo
      */
     public function delete($id)
     {
-        $Todo = $this->Todo->find($id);
-        $Todo->delete();
+        $todo = $this->todo->find($id);
+        $todo->delete();
 
-        return $Todo;
+        return $todo;
     }
 }

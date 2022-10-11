@@ -120,6 +120,6 @@ class TodoController extends Controller
         for ($i = 0; $i<count($idArr); $i++){
             $result = DB::table('todos')->where('id', '=', $idArr[$i])->delete();
         }
-        return response()->json(['success'=>"Selected Items Deleted successfully."]);
+        return response()->json(['success' => "Selected Items Deleted successfully."]);
     }
 }
