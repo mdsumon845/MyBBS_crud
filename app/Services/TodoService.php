@@ -45,7 +45,7 @@ class TodoService
     public function savePostData($data)
     {
         $validator = Validator::make($data, [
-            'title'=>'required',
+            'title' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -76,7 +76,7 @@ class TodoService
     public function deleteById($id)
     {
         DB::beginTransaction();
-        try{
+        try {
             $todo = $this->todoRepository->delete($id);
 
         } catch (Exception $e) {
