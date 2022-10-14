@@ -11,17 +11,17 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 {
     /**
-     * @var todoService
+     * @var TodoService
      */
     protected $todoService;
 
     /**
      * TodoController Constructor
      *
-     * @param todoService $todoService
+     * @param TodoService $todoService
      *
      */
-    public function __construct(todoService $todoService)
+    public function __construct(TodoService $todoService)
     {
         $this->todoService = $todoService;
     }
@@ -64,7 +64,7 @@ class TodoController extends Controller
             $result['data'] = $this->todoService->savePostData($data);
         } catch (Exception $e) {
             $result = [
-                'status'=> 500,
+                'status' => 500,
                 'error' => $e->getMessage()
             ];
         }

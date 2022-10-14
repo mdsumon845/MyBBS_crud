@@ -6,17 +6,17 @@ use App\Models\Todo;
 class TodoRepository
 {
     /**
-     * @var todo
+     * @var Todo
      */
     protected $todo;
 
     /**
      * TodoRepository constructor.
      *
-     * @param todo $todo
+     * @param Todo $todo
      */
 
-    public function __construct(todo $todo)
+    public function __construct(Todo $todo)
     {
         $this->todo = $todo;
     }
@@ -24,7 +24,7 @@ class TodoRepository
     /**
      * Get all post
      *
-     * @return todo $todo
+     * @return Todo $todo
      */
     public function getAllPost()
     {
@@ -38,7 +38,7 @@ class TodoRepository
      * Save todo
      *
      * @param $data
-     * @return todo
+     * @return Todo
      */
     public function save($data)
     {
@@ -65,7 +65,7 @@ class TodoRepository
      * Delete todo
      *
      * @param $data
-     * @return todo
+     * @return Todo
      */
     public function delete($id)
     {
